@@ -1,8 +1,11 @@
 package entity;
 
+import objectdraw.ActiveObject;
+import util.Polygon;
+
 import java.awt.*;
 
-public class Entity {
+public class Entity extends ActiveObject {
 
     int x;
     int y;
@@ -10,5 +13,8 @@ public class Entity {
 
     public Entity() {
 
+    }
+    public Point getLocation() {
+        return new Point(x, y);
     }
 }

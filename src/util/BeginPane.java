@@ -22,6 +22,7 @@ public class BeginPane {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Main.emit("join");
+                joinGameButton.removeActionListener(this);
             }
         });
         settingsButton.addActionListener(new ActionListener() {
