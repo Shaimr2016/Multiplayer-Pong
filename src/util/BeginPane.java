@@ -13,13 +13,21 @@ public class BeginPane {
     private JButton settingsButton;
 
     public BeginPane() {
+        addActionListeners();
+
         Main.replaceContentPane(panel);
     }
-    private void actionListeners() {
+    private void addActionListeners() {
         joinGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                Main.emit("join");
+            }
+        });
+        settingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }

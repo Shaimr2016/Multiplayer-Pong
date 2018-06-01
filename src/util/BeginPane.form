@@ -19,7 +19,7 @@
         <properties>
           <background color="-15914690"/>
           <foreground color="-1"/>
-          <text value="Join Game"/>
+          <text value="Join game"/>
         </properties>
       </component>
       <component id="900dd" class="javax.swing.JButton" binding="settingsButton">
