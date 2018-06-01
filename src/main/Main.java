@@ -1,6 +1,8 @@
 package main;
 
 import network.Network;
+import util.BeginPane;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,6 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
         initFrame();
+        new BeginPane();
     }
     private static void initFrame() {
         frame = new JFrame("Multi-player Pong LoL");
@@ -25,9 +28,12 @@ public class Main {
     public static void replaceContentPane(JPanel panel) {
         frame.setContentPane(panel);
         frame.pack();
-        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.validate();
+        frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        frame.revalidate();
         frame.repaint();
+    }
+    public static JFrame getFrame() {
+        return frame;
     }
 }
