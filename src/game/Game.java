@@ -1,6 +1,7 @@
 package game;
 
 import entity.Player;
+import main.Main;
 import objectdraw.DrawingCanvas;
 import objectdraw.WindowController;
 import util.KeyBind;
@@ -13,11 +14,12 @@ public class Game extends WindowController {
     private boolean gameEnded = false;
 
     public Game() {
+        Main main = new Main(this);
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        canvas.addKeyListener(new KeyBind());
-        players[0] = new Player(true, canvas.getHeight() - 100);
-        canvas.requestFocus();
     }
+
+    // GETTERS
+
     public DrawingCanvas getCanvas() {
         return canvas;
     }
@@ -26,5 +28,10 @@ public class Game extends WindowController {
     }
     public boolean isGameEnded() {
         return gameEnded;
+    }
+    public void run() {
+        canvas.addKeyListener(new KeyBind());
+        players[0] = new Player(true, canvas.getHeight() - 100, canvas);
+        canvas.requestFocus();
     }
 }

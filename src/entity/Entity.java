@@ -11,7 +11,13 @@ public class Entity extends ActiveObject {
     int y;
     Polygon bounds;
 
-    public Entity() {
+    public Entity(int x, int y) {
+        this.x = x;
+        this.y = y;
+        start();
+    }
+    @Override
+    public void run() {
 
     }
     public Point getLocation() {

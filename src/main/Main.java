@@ -10,41 +10,28 @@ import java.awt.*;
 public class Main {
 
     private static Network network;
-    private static JFrame frame;
     private static Game game;
 
-    public static void main(String[] args) {
-        initFrame();
+    public Main(Game game) {
+        this.game = game;
         network = new Network();
         new BeginPane();
     }
-    private static void initFrame() {
-        frame = new JFrame("Multi-player Pong LoL");
-
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
-        frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        frame.pack();
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    }
     public static void replaceContentPane(JPanel panel) {
-        frame.setContentPane(panel);
-        frame.pack();
-        frame.setVisible(true);
-        frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        frame.revalidate();
-        frame.repaint();
+        game.setContentPane(panel);
+        game.getContentPane().setVisible(true);
+        game.getContentPane().setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        game.getContentPane().revalidate();
+        game.getContentPane().repaint();
     }
-
     public static void startGame() {
-        game = new Game();
+        game.run();
     }
 
     // GETTERS
 
-    public static JFrame getFrame() {
-        return frame;
+    public static Container getFrame() {
+        return game.getContentPane();
     }
     public static Game getGame() {
         return game;

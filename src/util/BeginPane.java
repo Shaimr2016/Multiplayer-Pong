@@ -33,6 +33,6 @@ public class BeginPane {
         });
     }
     private void createUIComponents() {
-        panel = new ImagePanel("./data/images/background.JPG");
+        panel = new ImagePanel("data/images/background.JPG");
     }
 }

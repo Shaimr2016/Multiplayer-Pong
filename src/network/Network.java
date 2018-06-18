@@ -22,7 +22,7 @@ public class Network {
             socket.on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener() {
                 @Override
                 public void call(Object... objects) {
-
+                    System.out.println("Failed to connect server");
                 }
             });
             socket.on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
@@ -34,6 +34,7 @@ public class Network {
             socket.on("start", new Emitter.Listener() {
                 @Override
                 public void call(Object... objects) {
+                    System.out.println("starting game");
                     Main.startGame();
                 }
             });
