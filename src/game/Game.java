@@ -1,37 +1,34 @@
 package game;
 
 import entity.Player;
-import main.Main;
 import objectdraw.DrawingCanvas;
-import objectdraw.WindowController;
+import objectdraw.FrameCanvas;
 import util.KeyBind;
 
 import java.awt.*;
 
-public class Game extends WindowController {
+public class Game extends FrameCanvas {
 
     private Player[] players = new Player[2];
     private boolean gameEnded = false;
 
     public Game() {
-        Main main = new Main(this);
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
+
+        addKeyListener(new KeyBind());
+        players[0] = new Player(true, getHeight() - 100, this);
+        requestFocus();
     }
 
     // GETTERS
 
     public DrawingCanvas getCanvas() {
-        return canvas;
+        return this;
     }
     public Player getPlayer() {
         return players[0];
     }
     public boolean isGameEnded() {
         return gameEnded;
-    }
-    public void run() {
-        canvas.addKeyListener(new KeyBind());
-        players[0] = new Player(true, canvas.getHeight() - 100, canvas);
-        canvas.requestFocus();
     }
 }

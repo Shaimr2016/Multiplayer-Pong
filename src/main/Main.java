@@ -11,27 +11,39 @@ public class Main {
 
     private static Network network;
     private static Game game;
+    private static JFrame frame;
 
-    public Main(Game game) {
-        this.game = game;
+    public static void main(String[] args) {
+        initFrame();
+
         network = new Network();
         new BeginPane();
     }
     public static void replaceContentPane(JPanel panel) {
-        game.setContentPane(panel);
-        game.getContentPane().setVisible(true);
-        game.getContentPane().setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        game.getContentPane().revalidate();
-        game.getContentPane().repaint();
+        frame.setContentPane(panel);
+        frame.getContentPane().setVisible(true);
+        frame.getContentPane().setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        frame.getContentPane().revalidate();
+        frame.getContentPane().repaint();
+    }
+    public static void initFrame() {
+        frame = new JFrame("Multi-player Pong - For no reason whatsoever");
+
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        frame.pack();
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
     public static void startGame() {
-        game.run();
+        game = new Game();
     }
 
     // GETTERS
 
     public static Container getFrame() {
-        return game.getContentPane();
+        return frame.getContentPane();
     }
     public static Game getGame() {
         return game;
