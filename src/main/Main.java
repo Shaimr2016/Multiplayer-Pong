@@ -34,10 +34,12 @@ public class Main {
         frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         frame.pack();
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
     public static void startGame() {
+        frame.dispose();
         game = new Game();
+        game.start();
     }
 
     // GETTERS
@@ -49,6 +51,9 @@ public class Main {
         return game;
     }
     public static void emit(String message, Object ... objects) {
-        network.emit(message, objects);
+//        network.emit(message, objects);
+        if (message.equals("join")) {
+            startGame();
+        }
     }
 }

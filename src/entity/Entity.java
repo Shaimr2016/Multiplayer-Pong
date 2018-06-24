@@ -14,7 +14,6 @@ public class Entity extends ActiveObject {
     public Entity(int x, int y) {
         this.x = x;
         this.y = y;
-        start();
     }
     @Override
     public void run() {

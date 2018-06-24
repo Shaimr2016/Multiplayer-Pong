@@ -14,9 +14,12 @@ public class Game extends FrameCanvas {
 
     public Game() {
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
-
-        addKeyListener(new KeyBind());
+    }
+    public void start() {
         players[0] = new Player(true, getHeight() - 100, this);
+        players[1] = new Player(false, 100, this);
+
+        addKeyListener(new KeyBind(players[0]));
         requestFocus();
     }
 
