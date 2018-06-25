@@ -1,6 +1,7 @@
 package entity;
 
 import objectdraw.ActiveObject;
+import objectdraw.Location;
 import util.Polygon;
 
 import java.awt.*;
@@ -9,6 +10,7 @@ public class Entity extends ActiveObject {
 
     int x;
     int y;
+    Location position;
     Polygon bounds;
 
     public Entity(int x, int y) {

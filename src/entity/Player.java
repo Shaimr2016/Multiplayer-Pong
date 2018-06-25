@@ -2,18 +2,20 @@ package entity;
 
 import main.Main;
 import objectdraw.DrawingCanvas;
-import objectdraw.FilledRect;
 import objectdraw.Location;
+import objectdraw.VisibleImage;
 import util.Polygon;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Player extends Entity {
 
     private boolean isYou;
-    private Location position;
     private Location tempPosition;
-    private FilledRect graphic;
+    private VisibleImage graphic;
     private DrawingCanvas canvas;
     private Thread moveThread;
 
@@ -26,8 +28,12 @@ public class Player extends Entity {
         this.isYou = isYou;
         this.bounds = new Polygon(canvas.getWidth() / 2, y, new Dimension(150, 20));
 
-        graphic = new FilledRect(
-                bounds.xpoints[0], bounds.ypoints[0], bounds.xpoints[2], bounds.ypoints[2], canvas);
+        try {
+            graphic = new VisibleImage(ImageIO.read(new File("data/images/pong_paddle.png")),
+                    position, 150, 20, canvas);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         start();
     }
@@ -40,8 +46,7 @@ public class Player extends Entity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            graphic.removeFromCanvas();
-            graphic = new FilledRect(position, 150, 20, canvas);
+            graphic.moveTo(position);
         }
         graphic.removeFromCanvas();
     }
@@ -53,9 +58,9 @@ public class Player extends Entity {
             return;
         }
         if (dir == direction.RIGHT) {
-            this.x += 20;
+            x += 20;
         } else if (dir == direction.LEFT) {
-            this.x -= 20;
+            x -= 20;
         }
         tempPosition = new Location(x, y);
         moveThread = new Thread(new Runnable() {
@@ -75,7 +80,6 @@ public class Player extends Entity {
                         e.printStackTrace();
                     }
                 }
-
             }
         });
         moveThread.start();
