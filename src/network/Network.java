@@ -53,7 +53,7 @@ public class Network {
                     }
                 }
             });
-            socket.on("ballMove", new Emitter.Listener() {
+            socket.on("ball_move", new Emitter.Listener() {
                 @Override
                 public void call(Object... objects) {
                     JSONObject j = (JSONObject) objects[0];
