@@ -37,7 +37,6 @@ public class Network {
             socket.on("start", new Emitter.Listener() {
                 @Override
                 public void call(Object... objects) {
-                    System.out.println("starting game");
                     Main.startGame();
                 }
             });

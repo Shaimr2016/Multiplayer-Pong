@@ -65,6 +65,7 @@ public class Player extends Entity {
             }
         });
         moveThread.start();
+        Main.emit("player_moved");
     }
     public void stopMove() {
         moveThread = null;

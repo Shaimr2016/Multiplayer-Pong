@@ -44,16 +44,16 @@ public class Ball extends Entity {
 
     private void checkCollision() {
         if (checkPlayerCollision() != null) {
-            Main.emit("playerBounce");
+            Main.emit("player_bounce");
         }
         if (checkWallBounce() != null) {
-            Main.emit("wallBounce");
+            Main.emit("wall_bounce");
         }
         if (checkScore() != null) {
             JSONObject j = new JSONObject();
             try {
                 j.put("player", checkScore());
-                Main.emit("playerScores", j);
+                Main.emit("player_scores", j);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
