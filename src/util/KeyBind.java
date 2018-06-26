@@ -11,18 +11,29 @@ public class KeyBind implements KeyListener {
     static int KEY_RIGHT = KeyEvent.VK_RIGHT;
     static int KEY_LEFT = KeyEvent.VK_LEFT;
 
+    private Player player;
+
+    public KeyBind(Player p) {
+        player = p;
+    }
+
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KEY_RIGHT) {
-             Main.getGame().getPlayer().move(Player.direction.RIGHT);
+            player.move(Player.direction.RIGHT);
+            Main.emit("move", player.getLocation());
         } else if (e.getKeyCode() == KEY_LEFT) {
-            Main.getGame().getPlayer().move(Player.direction.LEFT);
-            Main.emit("move", Main.getGame().getPlayer().getLocation());
+            player.move(Player.direction.LEFT);
+            Main.emit("move", player.getLocation());
         }
     }
     @Override
-    public void keyPressed(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {}
     @Override
-    public void keyReleased(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {
+        if (e.getKeyCode() == KEY_RIGHT || e.getKeyCode() == KEY_LEFT) {
+            player.stopMove();
+        }
+    }
 
 }
