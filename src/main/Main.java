@@ -51,7 +51,7 @@ public class Main {
         return game;
     }
     public static void emit(String message, Object ... objects) {
-//        network.emit(message, objects);
+        network.emit(message, objects);
         if (message.equals("join")) {
             startGame();
         }

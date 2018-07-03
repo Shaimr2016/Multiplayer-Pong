@@ -3,17 +3,14 @@ package game;
 import entity.*;
 import objectdraw.DrawingCanvas;
 import objectdraw.FrameCanvas;
-import objectdraw.Location;
 import util.KeyBind;
 
 import java.awt.*;
-import java.util.Random;
 
 public class Game extends FrameCanvas {
 
     private Player[] players = new Player[2];
     private Ball ball;
-    private Random random = new Random();
     private boolean gameEnded = false;
 
     public Game() {
@@ -26,21 +23,6 @@ public class Game extends FrameCanvas {
 
         addKeyListener(new KeyBind(players[0]));
         requestFocus();
-
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    synchronized (this) {
-                        wait(1000);
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                ball.moveTo(players[0].getLocation());
-            }
-        });
-        t.start();
     }
 
     // GETTERS

@@ -3,7 +3,10 @@ package entity;
 import main.Main;
 import objectdraw.DrawingCanvas;
 import objectdraw.Location;
+import objectdraw.Text;
 import objectdraw.VisibleImage;
+import org.json.JSONException;
+import org.json.JSONObject;
 import util.Polygon;
 
 import javax.imageio.ImageIO;
@@ -48,6 +51,15 @@ public class Player extends Entity {
         moveThread = new Thread(new Runnable() {
             @Override
             public void run() {
+                while (tempPosition == null) {
+                    try {
+                        synchronized (this) {
+                            wait(1);
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
                 while (tempPosition != null && !tempPosition.equals(position)) {
                     if (tempPosition.getX() > position.getX()) {
                         position.translate(1, 0);
@@ -65,7 +77,6 @@ public class Player extends Entity {
             }
         });
         moveThread.start();
-        Main.emit("player_moved");
     }
     public void stopMove() {
         moveThread = null;

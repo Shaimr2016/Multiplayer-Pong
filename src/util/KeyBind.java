@@ -2,6 +2,8 @@ package util;
 
 import entity.Player;
 import main.Main;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,10 +23,18 @@ public class KeyBind implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KEY_RIGHT) {
             player.move(Player.direction.RIGHT);
-            Main.emit("move", player.getLocation());
+            try {
+                Main.emit("player_moved", new JSONObject().put("position", player.getLocation()));
+            } catch (JSONException ex) {
+                ex.printStackTrace();
+            }
         } else if (e.getKeyCode() == KEY_LEFT) {
             player.move(Player.direction.LEFT);
-            Main.emit("move", player.getLocation());
+            try {
+                Main.emit("player_moved", new JSONObject().put("position", player.getLocation()));
+            } catch (JSONException ex) {
+                ex.printStackTrace();
+            }
         }
     }
     @Override

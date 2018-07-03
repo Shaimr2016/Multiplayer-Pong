@@ -16,7 +16,7 @@ public class Network {
 
     public Network() {
         try {
-            socket = IO.socket("http://192.168.1.169:5000");
+            socket = IO.socket("http://0.0.0.0:5000");
             socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
                 public void call(Object ... objects) {
 
