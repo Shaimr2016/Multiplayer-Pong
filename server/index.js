@@ -16,7 +16,10 @@ const io = socketio(server);
 /* ROUTES */
 let waitingConnections = [];
 io.on('connection', socket => {
-  console.log('connection made');
+  
+  let xSpeed;
+  let ySpeed;
+
   socket.on('join', () => {
     console.log('Request made to join');
     waitingConnections.push(socket);
@@ -26,10 +29,21 @@ io.on('connection', socket => {
     }
   })
   socket.on('player_move', ({ direction }) => {
-    io.emit('other_move', direction);
+    socket.broadcast.emit('other_move', direction);
   })
-  socket.on('ball_hit', ({ angle }) => {
-    io.emit('ball_bounce', angle);
+  socket.on('ball_wall_bounce', () => {
+    ySpeed *= -1;
+    socket.broadcast.emit('ball_wall_bounced', {
+      xSpeed,
+      ySpeed,
+    })
+  })
+  socket.on('ball_hit', () => {
+    xSpeed *= -1;
+    socket.broadcast.emit('ball_bounce', {
+      xSpeed,
+      ySpeed,
+    });
   })
   socket.on('disconnect', () => {
     console.log('disconnected');
